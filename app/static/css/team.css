@@ -28,10 +28,21 @@
 
 }
 
+.photo img {
+    transition: all 0.5s;
+    cursor: pointer;
+}
+
 .photo img{
     border-radius:50%;
     overflow: hidden;
     border: 1px black;
+
+
+}
+
+.photo img:hover {
+	transform: scale(1.2);
 }
 
 .perName{
