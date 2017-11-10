@@ -3,7 +3,7 @@
 <head>
 <title>Contact</title>
 <!-- for-mobile-apps -->
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, initial-scale=1.0, user-scalable=no">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="keywords" content="Deliccio Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
 Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
@@ -48,7 +48,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<span class="icon-bar"></span>
 					  </button>
 						<div class="logo">
-							<a class="navbar-brand" href="index.html">Neptune <span>Lingang Food</span></a>
+							<a class="navbar-brand" href="index.html">Neptune <span style="position:relative;top:10px">Lingang Food</span></a>
 						</div>
 					</div>
 
@@ -77,8 +77,23 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<p class="proident">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia 
 				deserunt mollit anim id est laborum fugiat quo voluptas nulla pariatur.</p>
 			<div class="contact-grid">
-				<div class="contact-left">
-					<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3056.9443837127305!2d-75.7983021!3d39.9873482!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0000000000000000%3A0x69c9c879a1263188!2sLutheran+Church+of+the+Good+Shepherd!5e0!3m2!1sen!2sin!4v1426659332982" frameborder="0" style="border:0"></iframe>
+
+				    <div class="contact-left">
+                    <div id="mapcontainer" style="height: 386px; width: 500px"></div>
+                        <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=mK5MFsL54UGP9rRKYWw4cbSWeF3xlCYV"></script>
+                        <script type="text/javascript">
+                            var map = new BMap.Map("mapcontainer");
+                            var point = new BMap.Point(121.905691,30.885067);
+                            map.centerAndZoom(point, 15);
+                            window.setTimeout(function(){
+                                map.panTo(new BMap.Point(121.905691,30.885067));
+                            }, 2000);
+                            map.enableScrollWheelZoom(true);
+                        </script>
+
+                    <!--  google map api  (you can use this api when you have VPN.)    !-->
+					<!--<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3056.9443837127305!2d-75.7983021!3d39.9873482!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0000000000000000%3A0x69c9c879a1263188!2sLutheran+Church+of+the+Good+Shepherd!5e0!3m2!1sen!2sin!4v1426659332982" frameborder="0" style="border:0"></iframe>
+				    !-->
 				</div>
 				<div class="contact-right">
 					<form>
@@ -100,8 +115,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
     <div class="team clearfix" >
         <h1 style="text-align: center; color: #803F5F">Group members</h1>
+
         <div class="line"></div>
         <div class="members">
+            <a name="goto"></a>
 
             <div class="individual">
                 <div class="photo">
@@ -169,8 +186,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<div class="footer-row">
 				<div class="col-md-3 footer-grids">
 					<h4><a href="index.html">Neptune</a></h4>
-					<p><a href="mailto:info@example.com">...</a></p>
-					<p>...</p>
+					<P>My tummy rumbling is one of the best sounds of nature.</P>
 				</div>
 				<div class="col-md-3 footer-grids">
 					<h3>Navigation</h3>					
@@ -186,11 +202,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<div class="col-md-3 footer-grids">
 					<h3>Support</h3>
 					<ul>
-						<li><a href="services.html">Services</a></li>
-						<li><a href="#">Help Center</a></li>
-						<li><a href="#">Lemollisollis</a></li>
+						<li><a href="#goto">About Us</a></li>
 					</ul>
 				</div>
+                <!--
 				<div class="col-md-3 footer-grids">	
 					<h3>Newsletter</h3>
 					<p>It was popularised in the 1960s with the release Ipsum. <p>
@@ -200,12 +215,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				 </form>
 				</div>
 				<div class="clearfix"> </div>
+				!-->
 			</div>
 		</div>
 	</div>
 	<div class="footer-bottom">
 		<div class="container">		
-			<p>Copyright &copy; 2015.Company name All rights reserved.More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a></p>					
+			<p>Copyright &copy; 2017.Group name All rights reserved by Neptune</p>
 		</div>
 	</div>
 <!--//footer-->	
