@@ -32,6 +32,12 @@ urlpatterns = [
     url(r'^tai/$', app_view.tai, name='tai'),
 
 
+    #登入板块
+    url(r'^signup/$',app_view.signup, name='signup'),
+    url(r'^logout/$',app_view.userlogout, name='userlogout'),
+    url(r'^login/$',app_view.userlogin, name='userlogin')
+
+
 
 ]
 
