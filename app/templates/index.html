@@ -37,13 +37,16 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <body>
 <!-- banner -->
 	<div class="banner">
-        {% if user %}
-        <div style="float:right; margin-right: 5% ">
-            <p style="color: white">Welecome {{ user.username }}&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<a class="btn btn-info" href="/logout/">log out</a></p>
+
+        <div style="float:right; margin-right: 2% ">
+            {% if user.username %}
+            <p style="color: white">Welecome {{ user.username }}&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<a class="btn btn-default" href="/logout/">log out</a></p>
                 {% if userInfo.level == 1 or userInfo.level == 2  %}<a style=" text-decoration: none; color: coral;" href="/manager/">Individual center </a>
                 {% else %} <a style=" text-decoration: none; color: coral;" href="/customer/"> Individual center</a>{% endif %}
-        {% endif %}
+            {% else  %}
+            {% endif %}
         </div>
+
 		<div class="container">
 			<div class="header-nav">
 				<nav class="navbar navbar-default">
@@ -169,10 +172,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								</div>
 							</div>
 						</div>
-                    {% else %}
-                    <div >
 
-                    </div>
                     {% endif %}
 					</div>
 						<script src="../static/javacript/easyResponsiveTabs.js" type="text/javascript"></script>
