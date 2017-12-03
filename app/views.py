@@ -8,18 +8,51 @@ from app.models import *
 
 #主页(登入，注册系统待开发)
 def index(request):
-    return render(request,"index.html")
+    user = request.user
+    if user:
+        username = user.username
+    return render(request,"index.html",locals())
 
 
 def customer(request):
     if request.method == 'GET':
         user = request.user
         username = user.username
-        userInfo = UserProfile.objects.filter(user = username)
+        userInfo = UserProfile.objects.get(user = user)
+        print(userInfo.sex)
         return render(request,"customer.html",locals())
-    else:
+    if request.method == 'POST':
+        errors = []
+        user = request.user
+        username = user.username
+        userInfo = UserProfile.objects.get(user=user)
+        password1 = request.POST.get('newpass')
+        password2 = request.POST.get('repeatpass')
 
-        return render(request,"customer.html")
+        gender = request.POST.get('gender')
+        userphone = request.POST.get('phone')
+        useremail = request.POST.get('email')
+
+        if password1 != password2:
+            errors.append("The password is different!")
+            errors1 = errors[0]
+            return render(request, "customer.html", locals())
+        else:
+
+            userInfo.sex = gender
+            if userphone:
+                userInfo.phone = userphone
+            if useremail:
+                user.email = useremail
+            if password1 and password2 and password1==password2:
+                print(password1)    #just for test
+                user.set_password(password1)
+            userInfo.save()
+            user.save()
+            return render(request,"customer.html", locals())
+
+def manage(request):
+    return render(request, "manage.html" )
 
 def fish(request):
     return render(request,"fish.html")
@@ -103,8 +136,8 @@ def signup(request):
 
 def userlogin(request):
     if request.method == 'POST':
-        username = request.POST.get('log_username', '')
-        password = request.POST.get('log_password', '')
+        username = request.POST.get('log_username')
+        password = request.POST.get('log_password')
         user = auth.authenticate(username=username, password=password)
         if user and user.is_active:
             auth.login(request, user)

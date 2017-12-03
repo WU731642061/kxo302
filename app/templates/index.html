@@ -163,7 +163,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						</div>
                     {% else %}
                     <div>
-                        <p>欢迎 <a href="/individual/"> {{ user.username }}</a>
+                        <p>Welecome {% if userInfo.level == 1 or userInfo.level == 2  %}<a href="/manager/"> {{ user.username }}</a>
+                        {% else %} <a href="/customer/"> {{ user.username }}</a>{% endif %}
                         <a class="btn btn-info" href="/logout/">登出</a></p>
                     </div>
                     {% endif %}

@@ -31,6 +31,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						  });
 						});
 					  </script>
+<script type="text/javascript">
+                    $(document).ready(function(){
+                      $("#changeButton").click(function(){
+                        $("#changePass").toggle("slow");
+                      });
+                    });
+</script>
 <!-- //FlexSlider -->
 <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
 </head>
@@ -84,46 +91,70 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
   <!-- Tab panes -->
   <div class="tab-content">
     <div role="tabpanel" class="tab-pane active" id="Basic-info" style="margin-left:50px;">
-      				    <i class="name">Name:{{ user.username }}</i><br/><br/>
-						<i class="gender">Gender:{{ userInfo.sex }}</i><br/><br/>
-						<i class="telephone">Telephone Number:{{ userInfo.phone }}</i><br/><br/>
-						<i class="mail">Mail:{{ user.email }}</i><br/><br/>
+        <i class="name">Name:&nbsp&nbsp&nbsp&nbsp<strong>{{ user.username }}</strong></i><br/><br/>
+        <i class="gender">Gender:&nbsp&nbsp&nbsp&nbsp<strong>{{ userInfo.sex }}</strong></i><br/><br/>
+        <i class="telephone">Telephone Number:&nbsp&nbsp&nbsp&nbsp<strong>{{ userInfo.phone }}</strong></i><br/><br/>
+        <i class="mail">Mail:&nbsp&nbsp&nbsp&nbsp<strong>{{ user.email }}</strong></i><br/><br/>
 			<div class="input-group">
 					<a href="/"><span class="label label-primary">Back</span></a>
 			</div>	
     </div>
     <div role="tabpanel" class="tab-pane" id="info-setting">
         <form method="post" action="/customer/">
+        {% csrf_token %}
+            <!--username cannot be changed because it is difficult to manage-->
 			<div class="input-group">
 				<span class="input-group-addon" id="basic-addon1">Name</span>
-				<input type="text" class="form-control" placeholder="Please enter your name" aria-describedby="basic-addon1" id="name">				
+				<input type="text" value="{{ user.username }}" readonly class="form-control" placeholder="Please enter your name" aria-describedby="basic-addon1" id="name">
 			</div>
-			<div class="input-group">
-				<span class="input-group-addon" id="basic-addon1">New Password</span>
-				<input type="password" class="form-control" placeholder="Please enter your new password" aria-describedby="basic-addon1" id="password">				
+            <div class="input-group">
+				<span class="input-group-addon" id="basic-addon1">Current Password</span>
+				<input type="password" readonly="true" class="form-control"  aria-describedby="basic-addon1" value="{{ user.password }}">
+
 			</div>
-			<div class="input-group">
-				<span class="input-group-addon" id="basic-addon1">Repeat New Password</span>
-				<input type="password" class="form-control" placeholder="Please repeat your new password" aria-describedby="basic-addon1" id="repeat">				
-			</div>
+            <div>
+                <button type="button" id="changeButton" class="btn btn-info">Change password</button>
+                <p>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</p>
+                <div id="changePass" style="display: none">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">New Password</span>
+                        <input type="password" name="newpass" class="form-control" placeholder="Please enter your new password" aria-describedby="basic-addon1" id="password">
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">Repeat New Password</span>
+                        <input type="password" name="repeatpass" class="form-control" placeholder="Please repeat your new password" aria-describedby="basic-addon1" id="repeat">
+                    </div>
+                    {% autoescape off %}
+                        {% if errors1 %}
+                            <script>alert("{{ errors1 }}")</script>
+                        {% endif %}
+                    {% endautoescape %}
+                </div>
+            </div>
+
+            <!--the following information can be changed-->
+
 			<div class="input-group">
 				<span class="input-group-addon" id="basic-addon1">Gender</span>&nbsp;&nbsp;&nbsp;
-				<input type="radio" name="gender" id="genderx" value="1"><label for="x"><p class="proident">male</p></label>&nbsp;&nbsp;
-				<input type="radio" name="gender" id="gendery" value="2"><label for="y"><p class="proident">female</p></label><br>
+				<label class="radio-inline">
+                  <input type="radio" name="gender" id="inlineRadio1" {% if userInfo.sex == 'male' %}checked{% endif %} value="male"> male
+                </label>
+                <label class="radio-inline">
+                  <input type="radio" name="gender" id="inlineRadio2" {% if userInfo.sex == 'female' %}checked{% endif %} value="female"> female
+                </label>
 			</div>
 			<div class="input-group">
 				<span class="input-group-addon" id="basic-addon1">Telephone Number</span>
-				<input type="text" class="form-control" placeholder="Telephone Number" aria-describedby="basic-addon1" id="telephone">			
+				<input type="text" name="phone" value="{{ userInfo.phone }}" class="form-control" placeholder="Telephone Number" aria-describedby="basic-addon1" id="telephone">
 			</div>
 			<div class="input-group">
 				<span class="input-group-addon" id="basic-addon1">Mail</span>
-				<input type="text" class="form-control" placeholder="Your Mail" aria-describedby="basic-addon2" id="mail">
-				<span class="input-group-addon" id="basic-addon2">.com</span>
+				<input type="email" name="email" value="{{ user.email }}" class="form-control" placeholder="Your Mail" aria-describedby="basic-addon2" id="mail">
 			</div>
 			<div class="input-group">
-					<a href="#"><span class="label label-success">Save</span></a>
-                    &nbsp;&nbsp;&nbsp;
-					<a href="#"><span class="label label-primary">Back</span></a>
+					<button class="btn btn-success" type="submit">Save</button>
+                    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+					<a href="/" class="btn btn-success" >Back</a>
 			</div>
         </form>
 	</div>
