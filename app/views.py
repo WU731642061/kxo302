@@ -10,6 +10,17 @@ from app.models import *
 def index(request):
     return render(request,"index.html")
 
+
+def customer(request):
+    if request.method == 'GET':
+        user = request.user
+        username = user.username
+        userInfo = UserProfile.objects.filter(user = username)
+        return render(request,"customer.html",locals())
+    else:
+
+        return render(request,"customer.html")
+
 def fish(request):
     return render(request,"fish.html")
 

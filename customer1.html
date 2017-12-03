@@ -84,16 +84,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
   <!-- Tab panes -->
   <div class="tab-content">
     <div role="tabpanel" class="tab-pane active" id="Basic-info" style="margin-left:50px;">
-      				    <i class="name">Name:{{ user.username }}</i><br/><br/>
-						<i class="gender">Gender:{{ userInfo.sex }}</i><br/><br/>
-						<i class="telephone">Telephone Number:{{ userInfo.phone }}</i><br/><br/>
-						<i class="mail">Mail:{{ user.email }}</i><br/><br/>
-			<div class="input-group">
-					<a href="/"><span class="label label-primary">Back</span></a>
-			</div>	
+      				    <i class="name">Name:</i><br/><br/> 
+						<i class="gender">Gender:</i><br/><br/> 
+						<i class="telephone">Telephone Number:</i><br/><br/>
+						<i class="mail">Mail:</i><br/><br/>
+						<i class="level">The Level of Member:</i><br/><br/>
     </div>
     <div role="tabpanel" class="tab-pane" id="info-setting">
-        <form method="post" action="/customer/">
 			<div class="input-group">
 				<span class="input-group-addon" id="basic-addon1">Name</span>
 				<input type="text" class="form-control" placeholder="Please enter your name" aria-describedby="basic-addon1" id="name">				
@@ -107,8 +104,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<input type="password" class="form-control" placeholder="Please repeat your new password" aria-describedby="basic-addon1" id="repeat">				
 			</div>
 			<div class="input-group">
-				<span class="input-group-addon" id="basic-addon1">Gender</span>&nbsp;&nbsp;&nbsp;
-				<input type="radio" name="gender" id="genderx" value="1"><label for="x"><p class="proident">male</p></label>&nbsp;&nbsp;
+				<span class="input-group-addon" id="basic-addon1">Gender</span>
+				<input type="radio" name="gender" id="genderx" value="1"><label for="x"><p class="proident">male</p></label><br>
 				<input type="radio" name="gender" id="gendery" value="2"><label for="y"><p class="proident">female</p></label><br>
 			</div>
 			<div class="input-group">
@@ -120,12 +117,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<input type="text" class="form-control" placeholder="Your Mail" aria-describedby="basic-addon2" id="mail">
 				<span class="input-group-addon" id="basic-addon2">.com</span>
 			</div>
-			<div class="input-group">
-					<a href="#"><span class="label label-success">Save</span></a>
-                    &nbsp;&nbsp;&nbsp;
-					<a href="#"><span class="label label-primary">Back</span></a>
-			</div>
-        </form>
 	</div>
   </div>
 

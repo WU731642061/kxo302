@@ -32,6 +32,10 @@ urlpatterns = [
     url(r'^tai/$', app_view.tai, name='tai'),
 
 
+    #客户端粒
+    url(r'^customer/$', app_view.customer, name='custoemr'),
+
+
     #登入板块
     url(r'^signup/$',app_view.signup, name='signup'),
     url(r'^logout/$',app_view.userlogout, name='userlogout'),
