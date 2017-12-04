@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Contact</title>
+<title>Manage</title>
 <!-- for-mobile-apps -->
 <meta name="viewport" content="width=device-width, initial-scale=1, initial-scale=1.0, user-scalable=no">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -77,7 +77,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
   <!-- Nav tabs -->
   <ul class="nav nav-tabs" role="tablist">
-    <li role="presentation" class="active"><a href="#newtage" aria-controls="newtag" role="tab" data-toggle="tab">Create new tag</a></li>
+    <li role="presentation" class="active"><a href="#newtag" aria-controls="newtag" role="tab" data-toggle="tab">Create new tag</a></li>
     <li role="presentation"><a href="#newshop" aria-controls="newshop" role="tab" data-toggle="tab">Create new shop</a></li>
     <li role="presentation"><a href="#tagDetail" aria-controls="tagDetail" role="tab" data-toggle="tab">Tag detail</a></li>
     <li role="presentation"><a href="#shopDetail" aria-controls="shopDetail" role="tab" data-toggle="tab">Shop detail</a></li>
@@ -87,30 +87,140 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
   <!-- Tab panes -->
   <div class="tab-content">
-    <div role="tabpanel" class="tab-pane active" id="newtage">
-    ...
+    <div role="tabpanel" class="tab-pane active" id="newtag">
+        <form method="post" action="/newtag/" enctype="multipart/form-data">
+        {% csrf_token %}
+   			 <div class="input-group">
+				<span class="input-group-addon" id="basic-addon1">Tag Name</span>
+				<input type="text" name="tagname" class="form-control" placeholder="Please enter the tag name" aria-describedby="basic-addon1" id="tagname">
+			 </div>
+            <div style="color: #ef6155">
+                {% autoescape off %}
+                    {{ errors1 }}
+                {% endautoescape %}
+            </div>
+			 <div class="input-group">
+			 <textarea name="tagintro" cols="65" rows="10" placeholder="Please enter the tag introduction" style="resize:none;"></textarea>
+			 </div>
+            <div style="color: #ef6155">
+                {% autoescape off %}
+                    {{ errors2 }}
+                {% endautoescape %}
+            </div>
+			 <div class="input-group">
+            		<label class="col-sm-2 control-label" style="width: 500px">Upload the cover photo of tag：</label>
+                    <br/>
+                    <div class="col-sm-10">
+                        <input type="file" name="tagpic" accept="image/png,image/gif,image/jpg"  >
+                    </div>
+          	 </div><br/>
+			<div class="input-group">
+					<button class="btn btn-success" type="submit">Save</button>
+                    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+					<a href="/" class="btn btn-success" >Back</a>
+			</div>
+		</form>
     </div>
     <div role="tabpanel" class="tab-pane" id="newshop">
-    ...
+        <form method="post" action="/newshop/" enctype="multipart/form-data">
+        {% csrf_token %}
+            <div class="input-group">
+				<span class="input-group-addon" id="basic-addon1">Shop Name</span>
+				<input type="text" name="shopname" class="form-control" placeholder="Please enter the shop name" aria-describedby="basic-addon1" id="shopname">
+			 </div>
+            <div style="color: #ef6155">
+                {% autoescape off %}
+                    {{ errors3 }}
+                {% endautoescape %}
+            </div>
+            <div style="color: #ef6155">
+                {% autoescape off %}
+                    {{ errors6 }}
+                {% endautoescape %}
+            </div>
+			 <div class="input-group">
+			 <textarea name="shopaddress" cols="65" rows="5" placeholder="Please enter the address of the shop" style="resize:none;"></textarea>
+			 </div>
+            <div style="color: #ef6155">
+                {% autoescape off %}
+                    {{ errors4 }}
+                {% endautoescape %}
+            </div>
+			 <div class="input-group">
+			 <span class="input-group-addon" id="basic-addon1">Shop Tag</span>
+			 <select name="access" id="access" class="access"/>
+             {% for tag in tags %}
+			 <option value="{{ tag.tagname }}">{{ tag.tagname }}</option>
+			 {% endfor %}
+			 </select> 
+			 </div>
+             <div style="color: #ef6155">
+                {% autoescape off %}
+                    {{ errors5 }}
+                {% endautoescape %}
+             </div>
+			 <div class="input-group">
+            		<label class="col-sm-2 control-label" style="width: 500px">Upload the cover photo of Shop：</label>
+                    <br/>
+                    <div class="col-sm-10">
+                        <input type="file" name="shoppic" accept="image/png,image/gif,image/jpg" >
+                    </div>
+          	 </div><br/><br/><br/>
+			<div class="input-group">
+					<button class="btn btn-success" type="submit">Save</button>
+                    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+					<a href="/" class="btn btn-success" >Back</a>
+			</div>
+        </form>
 	</div>
     <div role="tabpanel" class="tab-pane" id="tagDetail">
-    ...
+        <table class="table table-hover">
+          <tr>
+            <th>Tag ID</th>
+            <th>Tag Name</th>
+            <th>Operation</th>
+          </tr>
+          {% for x in tags %}
+            <tr>
+                <td>{{ x.id}}</td>
+                <td>{{ x.tagname}}</td>
+
+                <td>
+                    <a href="/tagdetail/?id={{ x.id }}" class="btn btn-info">Update</a>
+
+                    <a href="/delete/?id={{ x.id }}" class="btn btn-info" onclick="return confirm('确定要删除吗')">Delete</a>
+                </td>
+            </tr>
+          {% endfor %}
+        </table>
 	</div>
     <div role="tabpanel" class="tab-pane" id="shopDetail">
-    ...
+        <table class="table table-hover">
+          <tr>
+            <th>Shop ID</th>
+            <th>Shop Name</th>
+            <th>Operation</th>
+          </tr>
+          {% for i in shops  %}
+            <tr>
+                <td>{{i.id}}</td>
+                <td>{{i.shopName}}</td>
+
+                <td>
+                    <a href="/shopdetail/?id={{ i.id }}" class="btn btn-info">Update</a>
+
+                    <a href="/delete/?id={{ i.id }}" class="btn btn-info" onclick="return confirm('确定要删除吗')">Delete</a>
+
+
+                </td>
+            </tr>
+          {% endfor %}
+        </table>
 	</div>
   </div>
 
 </div>
 
-<script>
-    $('li a').click(function (e) {
-        e.preventDefault();
-        $(this).tab('show')
-    })
-
-
-</script>
 
 
 

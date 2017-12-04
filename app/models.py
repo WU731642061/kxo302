@@ -25,7 +25,7 @@ class UserProfile(models.Model):
 #商店分类
 
 class shoptag(models.Model):
-    tagname = models.CharField(max_length=20,unique=True,blank=False,null=False)
+    tagname = models.CharField(max_length=20,unique=False,blank=False,null=False)
     tagPic = models.ImageField(upload_to='tagImg', blank=True, null=True)
     tagIntro = models.CharField(max_length=500, default='None')
 

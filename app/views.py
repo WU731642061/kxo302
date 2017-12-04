@@ -6,11 +6,12 @@ from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.models import User
 from app.models import *
 
-#主页(登入，注册系统待开发)
+#主页
 def index(request):
     user = request.user
-    if user:
-        username = user.username
+    username = user.username
+    if request.user.is_authenticated():
+        userInfo = UserProfile.objects.get(user=user)
     return render(request,"index.html",locals())
 
 
@@ -51,8 +52,181 @@ def customer(request):
             user.save()
             return render(request,"customer.html", locals())
 
+#只有level=1or2的人才能进的data management
 def manage(request):
-    return render(request, "manage.html" )
+    if request.method == 'GET':
+        shops = ShopInfo.objects.all()
+        tags = shoptag.objects.all()
+        return render(request, "manage.html",locals() )
+
+#删除商铺，分类
+def delpic(request):
+    if request.method == 'POST':
+        picID = request.POST.get('pic_id')  # 获取图片id值
+        id = request.POST.get('shop_id')
+        pic = shopPic.objects.get(id=picID)
+        pic.delete()
+        return HttpResponseRedirect("/manage/")
+
+
+def newtag(request):
+    if request.method == 'POST':
+
+        shops = ShopInfo.objects.all()
+        tags = shoptag.objects.all()
+
+        errors = []
+        name = request.POST.get('tagname')
+        intro = request.POST.get('tagintro')
+        img = request.FILES.get('tagpic')
+        print(name,intro,img)
+        if not name:
+            errors.append("Please add tag name!")
+            errors1 = errors[0]
+            return render(request, "manage.html", locals())
+        if not intro:
+            errors.append("Please add tag introduction!")
+            errors2 = errors[0]
+            return render(request, "manage.html", locals())
+        if errors == []:
+            tag = shoptag()
+            tag.tagname =name
+            tag.tagIntro = intro
+            tag.tagPic = img
+            tag.save()
+            return HttpResponseRedirect("/manage/")
+    else:
+        shops = ShopInfo.objects.all()
+        tags = shoptag.objects.all()
+        return render(request, "manage.html", locals())
+
+def newshop(request):
+    if request.method == 'POST':
+
+        shops = ShopInfo.objects.all()
+        tags = shoptag.objects.all()
+
+        errors = []
+        name =  request.POST.get('shopname')
+        address = request.POST.get('shopaddress')
+        tag = request.POST.get('access')
+        cover = request.FILES.get('shoppic')
+        if not name:
+            errors.append("Please add shop name!")
+            errors3 = errors[0]
+            return render(request, "manage.html", locals())
+        if not address:
+            errors.append("Please add shop aadress!")
+            errors4 = errors[0]
+            return render(request, "manage.html", locals())
+        if not tag:
+            errors.append("Please select shop tag!")
+            errors5 = errors[0]
+            return render(request, "manage.html", locals())
+
+        shopCheck = ShopInfo.objects.filter(shopName=name)
+
+        if len(shopCheck) > 0:
+            errors.append("shop has existed")
+            errors6 = errors[0]
+            return render(request, "manage.html", locals())
+
+        if errors == []:
+            shop = ShopInfo()
+            taginfo =shoptag.objects.get(tagname=tag)
+            shop.shopName = name
+            shop.shopAddress = address
+            shop.shopCover = cover
+            shop.tag = taginfo
+            shop.save()
+            return HttpResponseRedirect("/manage/")
+
+
+    else:
+        shops = ShopInfo.objects.all()
+        tags = shoptag.objects.all()
+        return render(request, "manage.html", locals())
+
+def tagdetail(request):
+    if request.method == 'GET':
+        id = request.GET['id']
+        tag = shoptag.objects.get(id = id)
+        return render(request, "tagDetail.html", locals())
+    else:
+        errors = []
+        id = request.POST.get('tagid')
+        name = request.POST.get('tagname')
+        intro = request.POST.get('tagintro')
+        img = request.FILES.get('tagpic')
+        print(name, intro, img)
+        if not name:
+            errors.append("Please add tag name!")
+            errors1 = errors[0]
+            return render(request, "tagDetail.html", locals())
+        if not intro:
+            errors.append("Please add tag introduction!")
+            errors2 = errors[0]
+            return render(request, "tagDetail.html", locals())
+        if errors == []:
+            tag = shoptag.objects.get(id=id)
+            tag.tagIntro = intro
+            if img:
+                tag.tagPic = img
+            tag.save()
+            return HttpResponseRedirect("/manage/")
+
+
+def shopdatail(request):
+    if request.method == 'GET':
+        id = request.GET['id']
+        shop = ShopInfo.objects.get(id = id)
+        tags = shoptag.objects.all()
+        pic = shopPic.objects.filter(shop=shop)
+
+        return render(request, "shopDetail.html",locals())
+    else:
+        errors = []
+        id = request.POST.get('shopid')
+        name = request.POST.get('shopname')
+        address = request.POST.get('shopaddress')
+        tag = request.POST.get('access')
+        cover = request.FILES.get('shoppic')
+        img = request.FILES.get('contentpic')
+
+        shop = ShopInfo.objects.get(id=id)
+        tags = shoptag.objects.all()
+        pic = shopPic.objects.filter(shop=shop)
+
+        if not name:
+            errors.append("Please add shop name!")
+            errors3 = errors[0]
+            return render(request, "shopDetail.html", locals())
+        if not address:
+            errors.append("Please add shop aadress!")
+            errors4 = errors[0]
+            return render(request, "shopDetail.html", locals())
+        if not tag:
+            errors.append("Please select shop tag!")
+            errors5 = errors[0]
+            return render(request, "shopDetail.html", locals())
+
+
+        if errors == []:
+            taginfo = shoptag.objects.get(tagname=tag)
+            shop.shopAddress = address
+            if cover:
+                shop.shopCover = cover
+            if img:
+                contentImg = shopPic()
+                contentImg.shop = shop
+                contentImg.shopPic = img
+                contentImg.save()
+
+            shop.tag = taginfo
+            shop.save()
+            return HttpResponseRedirect("/manage/")
+
+
 
 def fish(request):
     return render(request,"fish.html")

@@ -41,12 +41,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <div style="float:right; margin-right: 2% ">
             {% if user.username %}
             <p style="color: white">Welecome {{ user.username }}&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<a class="btn btn-default" href="/logout/">log out</a></p>
-                {% if userInfo.level == 1 or userInfo.level == 2  %}<a style=" text-decoration: none; color: coral;" href="/manager/">Individual center </a>
+                {% if userInfo.level == 1 or userInfo.level == 2  %}<a style=" text-decoration: none; color: coral;" href="/manage/">Individual center </a>
                 {% else %} <a style=" text-decoration: none; color: coral;" href="/customer/"> Individual center</a>{% endif %}
             {% else  %}
             {% endif %}
         </div>
-
+        <br/>
 		<div class="container">
 			<div class="header-nav">
 				<nav class="navbar navbar-default">

@@ -38,10 +38,22 @@ urlpatterns = [
     #管理端
     url(r'^manage/$', app_view.manage, name='manage'),
 
+    #创建新店和新分类
+    url(r'^newtag/$', app_view.newtag, name='newtag'),
+    url(r'^newshop/$', app_view.newshop, name='newshop'),
+
+    #tag详情
+    url(r'^tagdetail/$', app_view.tagdetail, name='tagdetail'),
+    url(r'^shopdetail/$', app_view.shopdatail, name='shopdetail'),
+
     #登入板块
     url(r'^signup/$',app_view.signup, name='signup'),
     url(r'^logout/$',app_view.userlogout, name='userlogout'),
-    url(r'^login/$',app_view.userlogin, name='userlogin')
+    url(r'^login/$',app_view.userlogin, name='userlogin'),
+
+    #删除图片，数据
+    url(r'^delpic/$', app_view.delpic, name='delpic'),
+
 
 
 

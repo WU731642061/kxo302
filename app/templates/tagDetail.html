@@ -71,6 +71,52 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!-- welcome -->
 
 
+<div style="width: 40%;margin-left: 30%;margin-top: 50px;margin-bottom: 50px;">
+    <h4 style="text-align: center"> Update the tag</h4>
+    <br/>
+    <div role="tabpanel" class="tab-pane active">
+        <form method="post" action="/tagdetail/" enctype="multipart/form-data">
+        {% csrf_token %}
+   			 <div class="input-group">
+				<span class="input-group-addon" id="basic-addon1">Tag Name</span>
+				<input type="text" readonly name="tagname" value="{{ tag.tagname }}" class="form-control" placeholder="Please enter the tag name" aria-describedby="basic-addon1" id="tagname">
+			 </div>
+            <div style="color: #ef6155">
+                {% autoescape off %}
+                    {{ errors1 }}
+                {% endautoescape %}
+            </div>
+			 <div class="input-group">
+			 <textarea name="tagintro" cols="65" rows="10" placeholder="Please enter the tag introduction" style="resize:none;">{{ tag.tagIntro }}</textarea>
+			 </div>
+            <div style="color: #ef6155">
+                {% autoescape off %}
+                    {{ errors2 }}
+                {% endautoescape %}
+            </div>
+			 <div class="input-group">
+                 {% if tag.tagPic %}
+                    <img src="{{ tag.tagPic.url }}" height="400" width="300" alt="The picture lost"/>
+                 {% else %}
+                    <p>This tag has not cover potho</p>
+                     <br/>
+                 {% endif %}
+            		<label class="col-sm-2 control-label" style="width: 500px">You can upload the cover photo of tag：</label>
+                    <br/>
+                    <div class="col-sm-10">
+                        <input type="file" name="tagpic" accept="image/png,image/gif,image/jpg"  >
+                    </div>
+          	 </div><br/>
+			<div class="input-group">
+                    <input type="text" name="tagid" hidden value="{{ tag.id }}">
+					<button class="btn btn-success" type="submit">Save</button>
+                    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+					<a href="/manage/" class="btn btn-success" >Back</a>
+			</div>
+		</form>
+    </div>
+</div>
+
 
 
 

@@ -73,7 +73,98 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!-- welcome -->
 
 
+<div style="width: 40%;margin-left: 30%;margin-top: 50px;margin-bottom: 50px;">
+    <h4 style="text-align: center"> Update the shop</h4>
+    <br/>
+        <form method="post" action="/shopdetail/" enctype="multipart/form-data">
+        {% csrf_token %}
+            <div class="input-group">
+				<span class="input-group-addon" id="basic-addon1">Shop Name</span>
+				<input type="text" readonly name="shopname" value="{{ shop.shopName }}" class="form-control"  aria-describedby="basic-addon1" id="shopname">
+			 </div>
+            <div style="color: #ef6155">
+                {% autoescape off %}
+                    {{ errors3 }}
+                {% endautoescape %}
+            </div>
+			 <div class="input-group">
+			 <textarea name="shopaddress" cols="65" rows="5" placeholder="Please enter the address of the shop" style="resize:none;">{{ shop.shopAddress }}</textarea>
+			 </div>
+            <div style="color: #ef6155">
+                {% autoescape off %}
+                    {{ errors4 }}
+                {% endautoescape %}
+            </div>
+			 <div class="input-group">
+			 <span class="input-group-addon" id="basic-addon1">Shop Tag</span>
+			 <select name="access" id="access" class="access"/>
+             {% for tag in tags %}
+			 <option value="{{ tag.tagname }}"  {% if shop.tag == tag %} selected{% endif %}>{{ tag.tagname }}</option>
+			 {% endfor %}
+			 </select>
+			 </div>
+             <div style="color: #ef6155">
+                {% autoescape off %}
+                    {{ errors5 }}
+                {% endautoescape %}
+             </div>
+            <div>
+                {% if shop.shopCover %}
+                    <img src="{{ shop.shopCover.url }}" height="200px" width="150px" alt="The picture lost"/>
+                 {% else %}
+                    <p>This tag has not cover potho</p>
+                     <br/>
+                 {% endif %}
+            </div>
+			 <div class="input-group">
+            		<label class="col-sm-2 control-label" style="width: 500px">Upload the cover photo of Shop：</label>
+                    <br/>
+                    <div class="col-sm-10">
+                        <input type="file" name="shoppic" accept="image/png,image/gif,image/jpg" >
+                    </div>
+          	 </div>
 
+            <div class="input-group">
+            		<label class="col-sm-2 control-label" style="width: 500px">Upload the content photo of Shop：</label>
+                    <br/>
+                    <div class="col-sm-10">
+                        <input type="file" name="contentpic" accept="image/png,image/gif,image/jpg" >
+                    </div>
+          	 </div>
+
+            <br/><br/><br/>
+			<div class="input-group">
+                    <input type="text" name="shopid" hidden value="{{ shop.id }}">
+					<button class="btn btn-success" type="submit">Save</button>
+                    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+					<a href="/manage/" class="btn btn-success" >Back</a>
+			</div>
+        </form>
+        <br/><br/>
+        <div class="input-group" >
+            <h4 > Picture preview</h4>
+            <br/>
+                {% if pic %}
+                    <div style="float: left;display: block;">
+                    {% for a in pic%}
+                    <img src="{{ a.shopPic.url}}" height="200px" width="150px" alt="The picture lost"/>
+                        <form action="/delpic/" method="post">
+                        {% csrf_token %}
+                            <input type="hidden" name="pic_id"  value="{{ a.id }}" >
+                            <input type="hidden" name="shop_id"  value="{{ shop.id }}" >
+                            <input type="image" class="glyphicon glyphicon-remove-circle" value=" "
+                                   style="position: relative; top: -200px; background-color: ghostwhite"
+                                   onclick="return confirm('确定要删除吗')">
+                        </form>
+                    {%  endfor %}
+                    </div>
+                 {% else %}
+                    <p>This tag has not content potho</p>
+                     <br/>
+                 {% endif %}
+            </div>
+
+	</div>
 
 
 <!-- //welcome -->
