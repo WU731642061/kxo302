@@ -68,6 +68,21 @@ def delpic(request):
         pic.delete()
         return HttpResponseRedirect("/manage/")
 
+def deltag(request):
+    if request.method == 'GET':
+        id = request.GET['id']
+        tag = shoptag.objects.get(id=id)
+        tag.delete()
+        return HttpResponseRedirect("/manage/")
+
+
+def delshop(request):
+    if request.method == 'GET':
+        id = request.GET['id']
+        shop = ShopInfo.objects.get(id=id)
+        shop.delete()
+        return HttpResponseRedirect("/manage/")
+
 
 def newtag(request):
     if request.method == 'POST':

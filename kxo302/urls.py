@@ -53,6 +53,8 @@ urlpatterns = [
 
     #删除图片，数据
     url(r'^delpic/$', app_view.delpic, name='delpic'),
+    url(r'^deltag/$', app_view.deltag, name='deltag'),
+    url(r'^delshop/$', app_view.delshop, name='delshop'),
 
 
 
