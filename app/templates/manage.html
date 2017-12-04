@@ -38,6 +38,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 <body>
 <!-- banner -->
+{% if userInfo.level == 1 or userInfo.level == 2 %}
 	<div class="banner1">
 		<div class="container">
 			<div class="header-nav">
@@ -279,5 +280,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!-- for bootstrap working -->
 		<script src="../static/javacript/bootstrap.min.js"> </script>
 <!-- //for bootstrap working -->
+{% else %}
+    <script language="javascript" type="text/javascript">
+    window.location.href='/';
+    </script>
+{% endif %}
 </body>
 </html>

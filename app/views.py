@@ -1,5 +1,6 @@
 #coding:utf-8
 from django.contrib import auth
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.http import HttpResponse,HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
@@ -53,8 +54,13 @@ def customer(request):
             return render(request,"customer.html", locals())
 
 #只有level=1or2的人才能进的data management
+@login_required(login_url='/')
 def manage(request):
     if request.method == 'GET':
+        user = request.user
+        username = user.username
+        if request.user.is_authenticated():
+            userInfo = UserProfile.objects.get(user=user)
         shops = ShopInfo.objects.all()
         tags = shoptag.objects.all()
         return render(request, "manage.html",locals() )
@@ -162,6 +168,7 @@ def newshop(request):
         tags = shoptag.objects.all()
         return render(request, "manage.html", locals())
 
+@login_required(login_url='/')
 def tagdetail(request):
     if request.method == 'GET':
         id = request.GET['id']
@@ -190,7 +197,7 @@ def tagdetail(request):
             tag.save()
             return HttpResponseRedirect("/manage/")
 
-
+@login_required(login_url='/')
 def shopdatail(request):
     if request.method == 'GET':
         id = request.GET['id']
