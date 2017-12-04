@@ -78,22 +78,17 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<p class="proident">Some restaurants in Lingang</p>
 			</div>
 			<div class="menu-page-grids">
+                {% for restaurant in shop %}
 				<div class="food-list menu-grids-info">
-					<img src="../static/images/7.jpg" alt="" title=""/>
-					<h4><a href="/suwu/">Su Wu Herds Sheep</a></h4>
-					<p>No.101, lane 699, Hucheng Ring Road, Nanhui New Town (The Sharing Zone) </p>
+                    {% if restaurant.shopCover %}
+					<img src="{{ restaurant.shopCover.url }}" alt="" title=""/>
+                    {% else %}
+                    <img src="../static/images/food.jpeg" alt="" title=""/>
+                    {% endif %}
+					<h4><a href="/detail/?id={{ restaurant.id }}">{{ restaurant.shopName }}</a></h4>
+					<p>{{ restaurant.shopAddress }} </p>
 				</div>
-				<div class="food-list menu-grids-info">
-					<img src="../static/images/8.jpg" alt="" title=""/>
-					<h4><a href="/tai/">Tai Ma Li</a></h4>
-					<p>No.474, Shan Lan Road, Nanhui New Town</p>
-				</div>
-				<div class="food-list menu-grids-info">
-					<img src="../static/images/25.jpg" alt="" title=""/>
-					<h4><a href="/fish/">Fish's Love Never End</a></h4>
-					<p>No.176&208, lane 699, Hucheng Ring Road, Nanhui New Town (The Sharing Zone) </p>
-				</div>
-				<div class="clearfix"> </div>
+                {% endfor %}
 			</div>
 		</div>
 	</div>

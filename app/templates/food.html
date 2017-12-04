@@ -76,90 +76,23 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			</div>
 			<p class="proident">The introduction of some types of food</p>
 			<div class="welcome-info" >
+                {% for tag in tags %}
 				<div class=" welcome-info-left">
 				<br/><br/><br/><br/><br/><br/>
 					<div class="col-xs-5 welcome-info-leftl">
-						<img src="../static/images/1.jpg" alt=" " class="img-responsive" width="475px" />					</div>
+                        {% if tag.tagPic %}
+                            <a href="/restaurant/?tag={{ tag.tagname }}" ><img src="{{ tag.tagPic.url }}" alt="The picture has lost " class="img-responsive" width="475px" /></a>
+                        {% else %}
+                            <a href="/restaurant/?tag={{ tag.tagname }}" ><img src="../static/images/food.jpeg" alt="The picture has lost " class="img-responsive" width="475px" /></a>
+                        {% endif %}
+                    </div>
 					<div class="col-xs-7 welcome-info-leftr">
-						<h4>Fast Food</h4>
-						<p>Fast food is a mass-produced food that is prepared and served very quickly. The food is
-                            typically less nutritionally valuable compared to other foods and dishes. While any meal
-                            with low preparation time can be considered fast food, typically the term refers to food
-                            sold in a restaurant or store with preheated or precooked ingredients, and served to the
-                            customer in a packaged form for take-out/take-away.</p>
+						<h4>{{ tag.tagname }}</h4>
+						<p>{{ tag.tagIntro }}</p>
 					</div>
 					<div class="clearfix"> </div>
 				</div>
-				<div class=" welcome-info-left">
-				<br/><br/><br/><br/><br/><br/>
-					<div class="col-xs-5 welcome-info-leftl">
-						<img src="../static/images/2.jpg" alt=" " class="img-responsive" width="475px" />					</div>
-					<div class="col-xs-7 welcome-info-leftr">
-						<h4>Barbeque</h4>
-						<p>Barbecue or barbeque (informally BBQ or barby) is both a cooking method and an apparatus.
-                            Barbecuing is done slowly over low, indirect heat and the food is flavored by the smoking
-                            process, while grilling, a related process, is generally done quickly over moderate-to-high
-                            direct heat that produces little smoke.</p>
-					</div>
-					<div class="clearfix"> </div>
-				</div>
-				<div class=" welcome-info-left">
-				<br/><br/><br/><br/><br/><br/>
-					<div class="col-xs-5 welcome-info-leftl">
-						<img src="../static/images/26.jpg" alt=" " class="img-responsive" width="475px" />					</div>
-					<div class="col-xs-7 welcome-info-leftr">
-						<h4>Dessert</h4>
-						<p>Dessert is a confectionery course that concludes a main meal.
-                            The course usually consists of sweet foods, and possibly a beverage such as dessert wine
-                            or liqueur, but may include coffee, cheeses, nuts, or other savory items.
-                            In some parts of the world, such as much of central and western Africa, and most parts of
-                            China, there is no tradition of a dessert course to conclude a meal. </p>
-					</div>
-					<div class="clearfix"> </div>
-				</div>
-				<div class=" welcome-info-left">
-				<br/><br/><br/><br/><br/><br/>
-					<div class="col-xs-5 welcome-info-leftl">
-						<img src="../static/images/3.jpg" alt=" " class="img-responsive" width="475px" />					</div>
-					<div class="col-xs-7 welcome-info-leftr">
-						<h4>Hot Pot</h4>
-						<p>Hot pot is a Chinese soup containing a variety of East Asian foodstuffs and ingredients,
-                            prepared with a simmering pot of soup stock at the dining table. While the hot pot is kept
-                            simmering, ingredients are placed into the pot and are cooked at the table.
-                            Typical hot pot dishes include thinly sliced meat, leaf vegetables, mushrooms, wontons,
-                            egg dumplings, tofu, and seafood. The cooked food is usually eaten with a dipping sauce.</p>
-					</div>
-					<div class="clearfix"> </div>
-				</div>
-				<div class=" welcome-info-left">
-				<br/><br/><br/><br/><br/><br/>
-					<div class="col-xs-5 welcome-info-leftl">
-						<img src="../static/images/4.jpg" alt=" " class="img-responsive" width="475px" />					</div>
-					<div class="col-xs-7 welcome-info-leftr">
-						<h4>Noodles</h4>
-						<p>Noodles are a staple food in many cultures made from unleavened dough which is stretched,
-                            extruded, or rolled flat and cut into one of a variety of shapes. While long,
-                            thin strips may be the most common, many varieties of noodles are cut into waves,
-                            helices, tubes, strings, or shells, or folded over, or cut into other shapes. </p>
-					</div>
-					<div class="clearfix"> </div>
-				</div>
-				<div class=" welcome-info-left">
-				<br/><br/><br/><br/><br/><br/>
-					<div class="col-xs-5 welcome-info-leftl">
-						<img src="../static/images/5.jpg" alt=" " class="img-responsive" width="475px" />					</div>
-					<div class="col-xs-7 welcome-info-leftr">
-						<h4>Grilled Fish</h4>
-						<p>It almost seems perverse to take a fish, that wateriest of creatures, from its ocean home
-                            and subject it to the pummeling heat blast of a 450-degree oven. But it's a magical
-                            punishment, like that which turns coal into diamonds. That dry, powerful heat
-                            concentrates the fish's flavor while rapidly cooking the interior to an even,
-                            pearlescent finish. For dense cuts of fish like monkfish or salmon, or whole smaller fish,
-                            it's an elegant solution.</p>
-					</div>
-					<div class="clearfix"> </div>
-				</div>
-				<div class="clearfix"> </div>
+                {% endfor %}
 			</div>
 		</div>
 	</div>

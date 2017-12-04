@@ -15,7 +15,7 @@ def index(request):
         userInfo = UserProfile.objects.get(user=user)
     return render(request,"index.html",locals())
 
-
+@login_required(login_url='/')
 def customer(request):
     if request.method == 'GET':
         user = request.user
@@ -254,7 +254,20 @@ def fish(request):
     return render(request,"fish.html")
 
 def food(request):
-    return render(request,"food.html")
+    tags = shoptag.objects.all()
+    return render(request,"food.html", locals())
+
+def restaurant(request):
+    name = request.GET['tag']
+    tag = shoptag.objects.get(tagname=name)
+    shop = ShopInfo.objects.filter(tag = tag)
+    return render(request, "restaurant.html", locals())
+
+def detail(request):
+    id = request.GET['id']
+    shop = ShopInfo.objects.get(id = id)
+    pic = shopPic.objects.filter(shop=shop)
+    return render(request, "detail.html", locals())
 
 def future(request):
     return render(request,"future.html")
@@ -265,8 +278,6 @@ def healthy(request):
 def problems(request):
     return render(request,"problems.html")
 
-def single(request):
-    return render(request,"single.html")
 
 def suwu(request):
     return render(request,"suwu.html")
