@@ -27,14 +27,14 @@ class UserProfile(models.Model):
 class shoptag(models.Model):
     tagname = models.CharField(max_length=20,unique=False,blank=False,null=False)
     tagPic = models.ImageField(upload_to='tagImg', blank=True, null=True)
-    tagIntro = models.CharField(max_length=500, default='None')
+    tagIntro = models.CharField(max_length=1000, default='None')
 
 #商店数据库
 
 class ShopInfo(models.Model):
 
     shopName = models.CharField(max_length=50,unique=True,blank=False,null=False)
-    shopAddress = models.CharField(max_length=50)
+    shopAddress = models.CharField(max_length=500)
     shopCover = models.ImageField(upload_to='coverImg', blank=True, null=True)  # 上传商铺封面图
     tag = models.ForeignKey(shoptag)
 
