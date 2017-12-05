@@ -88,11 +88,21 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 {% endautoescape %}
             </div>
 			 <div class="input-group">
+                 <h5>Shop address</h5>
 			 <textarea name="shopaddress" cols="65" rows="5" placeholder="Please enter the address of the shop" style="resize:none;">{{ shop.shopAddress }}</textarea>
 			 </div>
             <div style="color: #ef6155">
                 {% autoescape off %}
                     {{ errors4 }}
+                {% endautoescape %}
+            </div>
+            <div class="input-group">
+                <h5>Shop introduction</h5>
+			 <textarea name="shopintro" cols="65" rows="5" placeholder="Please enter the introduction of the shop" style="resize:none;">{{ shop.shopIntro }}</textarea>
+			 </div>
+            <div style="color: #ef6155">
+                {% autoescape off %}
+                    {{ errors7 }}
                 {% endautoescape %}
             </div>
 			 <div class="input-group">

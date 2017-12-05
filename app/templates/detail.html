@@ -88,6 +88,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<h4>{{ shop.shopName }}</h4>
 						<p>{{ shop.shopAddress }}</p>
                         <br/>
+                        <p>{{ shop.shopIntro }}</p>
+                        <br/>
                         <div class="btn btn-info" >
                             <a onClick="javascript :history.back(-1);">return to the previous page</a>
                         </div>
@@ -106,7 +108,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
   <li>
   <dl onMouseOver="$(this,'span')[0].style.backgroundColor='#b52153'" 
   onmouseout="$(this,'span')[0].style.backgroundColor='#5f626b'">
-    <dt><A href="#"><IMG src="{{ img.shopPic.url }}"></A></dt>
+    <dt><IMG src="{{ img.shopPic.url }}"></dt>
 	</dl>
  </li>
     {% endfor %}

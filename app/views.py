@@ -130,6 +130,7 @@ def newshop(request):
         errors = []
         name =  request.POST.get('shopname')
         address = request.POST.get('shopaddress')
+        introduction = request.POST.get('shopintro')
         tag = request.POST.get('access')
         cover = request.FILES.get('shoppic')
         if not name:
@@ -139,6 +140,10 @@ def newshop(request):
         if not address:
             errors.append("Please add shop aadress!")
             errors4 = errors[0]
+            return render(request, "manage.html", locals())
+        if not introduction:
+            errors.append("Please add shop introduction!")
+            errors7 = errors[0]
             return render(request, "manage.html", locals())
         if not tag:
             errors.append("Please select shop tag!")
@@ -157,6 +162,7 @@ def newshop(request):
             taginfo =shoptag.objects.get(tagname=tag)
             shop.shopName = name
             shop.shopAddress = address
+            shop.shopIntro = introduction
             shop.shopCover = cover
             shop.tag = taginfo
             shop.save()
@@ -211,6 +217,7 @@ def shopdatail(request):
         id = request.POST.get('shopid')
         name = request.POST.get('shopname')
         address = request.POST.get('shopaddress')
+        introduction = request.POST.get('shopintro')
         tag = request.POST.get('access')
         cover = request.FILES.get('shoppic')
         img = request.FILES.get('contentpic')
@@ -224,8 +231,12 @@ def shopdatail(request):
             errors3 = errors[0]
             return render(request, "shopDetail.html", locals())
         if not address:
-            errors.append("Please add shop aadress!")
+            errors.append("Please add shop address!")
             errors4 = errors[0]
+            return render(request, "shopDetail.html", locals())
+        if not introduction:
+            errors.append("Please add shop introduction!")
+            errors7 = errors[0]
             return render(request, "shopDetail.html", locals())
         if not tag:
             errors.append("Please select shop tag!")
@@ -236,6 +247,7 @@ def shopdatail(request):
         if errors == []:
             taginfo = shoptag.objects.get(tagname=tag)
             shop.shopAddress = address
+            shop.shopIntro = introduction
             if cover:
                 shop.shopCover = cover
             if img:

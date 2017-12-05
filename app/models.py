@@ -34,6 +34,7 @@ class shoptag(models.Model):
 class ShopInfo(models.Model):
 
     shopName = models.CharField(max_length=50,unique=True,blank=False,null=False)
+    shopIntro = models.CharField(max_length=1000, blank=False, null= False, default= 'None')
     shopAddress = models.CharField(max_length=500)
     shopCover = models.ImageField(upload_to='coverImg', blank=True, null=True)  # 上传商铺封面图
     tag = models.ForeignKey(shoptag)
