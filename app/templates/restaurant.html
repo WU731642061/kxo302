@@ -81,9 +81,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 {% for restaurant in shop %}
 				<div class="food-list menu-grids-info">
                     {% if restaurant.shopCover %}
-					<img src="{{ restaurant.shopCover.url }}" alt="" title=""/>
+                        <a href="/detail/?id={{ restaurant.id }}"><img src="{{ restaurant.shopCover.url }}" alt="" title=""/></a>
                     {% else %}
-                    <img src="../static/images/food.jpeg" alt="" title=""/>
+                        <a href="/detail/?id={{ restaurant.id }}"><img src="../static/images/food.jpeg" alt="" title=""/></a>
                     {% endif %}
 					<h4><a href="/detail/?id={{ restaurant.id }}">{{ restaurant.shopName }}</a></h4>
 					<p>{{ restaurant.shopAddress }} </p>
