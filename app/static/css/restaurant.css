@@ -11,7 +11,7 @@ a{color:#333;text-decoration:none;}
 a:hover{color:#ef9b11; text-decoration:underline;}
 
 .run {
-	POSITION: relative; HEIGHT: 484px; width:680px;margin:20px auto;BORDER: #c3e8ef 1px solid; 
+	POSITION: relative; HEIGHT: 484px; width:680px;margin:20px auto;BORDER: #c3e8ef 1px solid;
 }
 .runlf {
 	Z-INDEX: 100; LEFT: 0px; WIDTH: 51px; POSITION: absolute; TOP: 210px; HEIGHT: 45px
